@@ -1,1 +1,1 @@
-web: gunicorn app:TweetApp
+web: gunicorn TweetApp:app
