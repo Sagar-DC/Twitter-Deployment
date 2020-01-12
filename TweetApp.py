@@ -104,10 +104,10 @@ def predict():
         search_tweet = request.form['message']
         num_tweet = request.form["num"]
     else:
-        search_tweet = r"Modi"
-        num_tweet = 10
-        #search_tweet = request.args.get("message")
-        #num_tweet = request.args.get("num")
+        #search_tweet = r"Modi"
+        #num_tweet = 10
+        search_tweet = request.args.get("message")
+        num_tweet = request.args.get("num")
         
     val = twitter(search_tweet, num_tweet)
     positive, negative, neutral, polarity = val
