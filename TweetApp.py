@@ -98,10 +98,15 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 def index():
     return render_template('index.html')
 
-@app.route("/predict",methods=["POST"])
+@app.route("/predict",methods=["POST", "GET"])
 def predict():
-    search_tweet = request.form['message']
-    num_tweet = request.form["num"]
+    if request.method == 'POST':
+        search_tweet = request.form['message']
+        num_tweet = request.form["num"]
+    else:
+        search_tweet = request.args.get("message")
+        num_tweet = request.args.get("num")
+        
     val = twitter(search_tweet, num_tweet)
     positive, negative, neutral, polarity = val
     
@@ -113,8 +118,12 @@ def predict():
 
 @app.route('/plot',methods=["POST"])
 def plot():
-    search_tweet = request.form['message']
-    num_tweet = request.form["num"]
+    if request.method == 'POST':
+        search_tweet = request.form['message']
+        num_tweet = request.form["num"]
+    else:
+        search_tweet = request.args.get("message")
+        num_tweet = request.args.get("num")
     
     val = twitter(search_tweet, num_tweet)
     
